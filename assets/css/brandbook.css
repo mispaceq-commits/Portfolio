@@ -222,10 +222,10 @@ h3.sub {
 .pat .pcap .pdesc { font-size: 13px; color: var(--graphite); }
 .pat--ink .swatch-area { background-color: var(--ink); }
 
-.p-monogram { background-image: url("../patterns/pattern-monogram.svg"); }
-.p-strokes  { background-image: url("../patterns/pattern-strokes.svg"); }
-.p-dots     { background-image: url("../patterns/pattern-dots.svg"); }
-.p-cross    { background-image: url("../patterns/pattern-cross.svg"); }
+.p-monogram   { background-image: url("../patterns/pattern-monogram.svg"); }
+.p-strokes    { background-image: url("../patterns/pattern-strokes.svg"); }
+.p-calligraphy{ background-image: url("../patterns/pattern-calligraphy.svg"); }
+.p-flourish   { background-image: url("../patterns/pattern-flourish.svg"); }
 
 /* ---------- Applications / mockups ---------- */
 .apps { display:grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(20px,3vw,36px); }
@@ -245,7 +245,7 @@ h3.sub {
   aspect-ratio: 1/1; border-radius: 16px; background: var(--red); display:grid; place-items:center; position:relative; overflow:hidden;
 }
 .avatar svg { width: 52%; position: relative; z-index:2; }
-.avatar .av-pat { position:absolute; inset:0; background-image:url("../patterns/pattern-cross.svg"); opacity:0.5; }
+.avatar .av-pat { position:absolute; inset:0; background-image:url("../patterns/pattern-flourish.svg"); opacity:0.4; }
 
 .poster {
   grid-column: 1 / -1;
@@ -282,4 +282,22 @@ h3.sub {
 @media (max-width: 560px) {
   .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
   body { font-size: 16px; }
+}
+
+/* ---------- Print / PDF ---------- */
+@media print {
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  html { scroll-behavior: auto; }
+  .cover { min-height: auto; padding-top: 48px; padding-bottom: 80px; }
+  .cover__logo { width: min(640px, 88%); }
+  .section { page-break-inside: avoid; break-inside: avoid; padding-top: 64px; padding-bottom: 64px; }
+  .cover, #concept, #direction, #logo, #color, #type, #elements, #patterns, #apps, #footer {
+    page-break-before: always; break-before: page;
+  }
+  .cover { page-break-before: avoid; break-before: avoid; }
+  .grid, .split, .apps, .rules { page-break-inside: avoid; }
+  .poster { page-break-inside: avoid; }
 }
