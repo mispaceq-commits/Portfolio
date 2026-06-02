@@ -1,0 +1,75 @@
+/* ===========================================================
+   Портфолио — Михаил Голиков (дополнение к brandbook.css)
+   =========================================================== */
+
+/* ---------- Заголовок работы ---------- */
+.work__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 4.4vw, 52px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+.section--dark .work__title { color: var(--paper); }
+
+.work__layout {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+.work__meta {
+  display: flex; flex-wrap: wrap; gap: 8px 14px;
+  margin-top: 22px;
+}
+.work__meta .chip {
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--graphite);
+  border: 1px solid var(--hairline);
+  border-radius: 999px; padding: 6px 14px;
+}
+.section--dark .work__meta .chip { color: rgba(242,238,230,0.78); border-color: rgba(255,255,255,0.2); }
+.section--dark .lead { color: rgba(242,238,230,0.82); }
+.section--dark .muted { color: rgba(242,238,230,0.6); }
+
+/* ---------- Галерея работ ---------- */
+.shots { display: grid; gap: clamp(14px, 1.8vw, 24px); margin-top: clamp(28px, 4vw, 52px); }
+.shots--2 { grid-template-columns: repeat(2, 1fr); }
+.shots--3 { grid-template-columns: repeat(3, 1fr); }
+.shot {
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  overflow: hidden;
+  align-self: start;
+}
+.section--dark .shot { background: #141414; border-color: rgba(255,255,255,0.14); }
+.shot img { width: 100%; height: auto; display: block; }
+.shot--span { grid-column: 1 / -1; }
+.shot__cap {
+  font-size: 12px; letter-spacing: 0.06em; color: var(--graphite);
+  padding: 10px 16px; border-top: 1px solid var(--hairline);
+}
+.section--dark .shot__cap { color: rgba(242,238,230,0.6); border-top-color: rgba(255,255,255,0.12); }
+
+/* ---------- Угловой логотип + вотермарка-монограмма ---------- */
+.corner-logo {
+  position: absolute; right: var(--gutter); bottom: 20px;
+  width: 86px; height: auto; z-index: 4; opacity: 0.9;
+}
+.wm-mono {
+  position: absolute; top: -64px; right: -56px;
+  width: 440px; height: auto; z-index: 0; opacity: 0.06;
+  pointer-events: none; user-select: none;
+}
+.section--dark .wm-mono { opacity: 0.12; }
+
+/* нумерация работ в eyebrow */
+.eyebrow .n { color: var(--red); }
+
+/* контактный блок повторяет .foot из брендбука */
+@media (max-width: 760px) {
+  .work__layout { grid-template-columns: 1fr; }
+  .shots--2, .shots--3 { grid-template-columns: 1fr; }
+}
