@@ -284,31 +284,27 @@ h3.sub {
   body { font-size: 16px; }
 }
 
-/* ---------- Print / PDF (горизонтальный / альбомный формат) ---------- */
+/* ---------- Print / PDF (горизонтальный формат, как на сайте) ----------
+   Никакой переверстки: сохраняем ровно тот же layout, что и на экране.
+   Только переносим каждую секцию на новую страницу и не рвём карточки. */
 @media print {
   *, *::before, *::after {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
   html { scroll-behavior: auto; }
-  body { font-size: 16px; }
 
-  /* каждая секция — отдельная альбомная "страница-слайд" */
-  .section, .cover {
-    min-height: 7.32in;           /* высота альбомной страницы 16:9 */
-    box-sizing: border-box;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 0.45in var(--gutter) !important;
-    page-break-inside: avoid; break-inside: avoid;
-    page-break-after: always; break-after: page;
+  /* чуть компактнее по вертикали, чтобы секции укладывались на широкий слайд */
+  .section { padding-top: 40px; padding-bottom: 40px; overflow: visible; }
+  .cover { min-height: auto; padding-top: 40px; padding-bottom: 56px; }
+
+  /* каждая секция — со своей страницы */
+  .section, .cover { break-after: page; page-break-after: always; }
+  #footer, footer.section { break-after: auto; page-break-after: auto; }
+
+  /* блоки не должны рваться посередине страницы */
+  .card, .swatch, .logoframe, .specimen, .gel, .pat,
+  .poster, .bizcard, .avatar, .mono-badge {
+    break-inside: avoid; page-break-inside: avoid;
   }
-  #footer { page-break-after: auto; break-after: auto; }
-  .wrap { width: 100%; }
-
-  .cover { min-height: auto; justify-content: space-between; }
-  .cover__logo { width: min(760px, 90%); }
-
-  /* блоки не должны рваться посередине */
-  .grid, .split, .apps, .rules, .logoframe, .swatch, .specimen,
-  .gel, .pat, .card, .poster, .mono-badge { page-break-inside: avoid; break-inside: avoid; }
 }
