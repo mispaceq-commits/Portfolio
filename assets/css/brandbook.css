@@ -284,20 +284,31 @@ h3.sub {
   body { font-size: 16px; }
 }
 
-/* ---------- Print / PDF ---------- */
+/* ---------- Print / PDF (горизонтальный / альбомный формат) ---------- */
 @media print {
   *, *::before, *::after {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
   html { scroll-behavior: auto; }
-  .cover { min-height: auto; padding-top: 48px; padding-bottom: 80px; }
-  .cover__logo { width: min(640px, 88%); }
-  .section { page-break-inside: avoid; break-inside: avoid; padding-top: 64px; padding-bottom: 64px; }
-  .cover, #concept, #direction, #logo, #color, #type, #elements, #patterns, #apps, #footer {
-    page-break-before: always; break-before: page;
+  body { font-size: 16px; }
+
+  /* каждая секция — отдельная альбомная "страница-слайд" */
+  .section, .cover {
+    min-height: 7.32in;           /* высота альбомной страницы 16:9 */
+    box-sizing: border-box;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0.45in var(--gutter) !important;
+    page-break-inside: avoid; break-inside: avoid;
+    page-break-after: always; break-after: page;
   }
-  .cover { page-break-before: avoid; break-before: avoid; }
-  .grid, .split, .apps, .rules { page-break-inside: avoid; }
-  .poster { page-break-inside: avoid; }
+  #footer { page-break-after: auto; break-after: auto; }
+  .wrap { width: 100%; }
+
+  .cover { min-height: auto; justify-content: space-between; }
+  .cover__logo { width: min(760px, 90%); }
+
+  /* блоки не должны рваться посередине */
+  .grid, .split, .apps, .rules, .logoframe, .swatch, .specimen,
+  .gel, .pat, .card, .poster, .mono-badge { page-break-inside: avoid; break-inside: avoid; }
 }
